@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diário Público com Banco de Dados</title>
+  <title>Bate-papo público por 1 hora</title>
   <link rel="stylesheet" href="assets/styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,36 +15,51 @@
 <body>
   <header class="hero">
     <div class="container">
-      <p class="eyebrow">GitHub Pages + IndexedDB</p>
-      <h1>Publique um site com banco de dados direto do GitHub</h1>
+      <p class="eyebrow">GitHub Pages + rede p2p</p>
+      <h1>Bate-papo público que dura 1 hora</h1>
       <p class="lead">
-        Este projeto demonstra como hospedar uma página estática no GitHub Pages e usar o
-        <strong>IndexedDB</strong> do navegador para ter um banco de dados completo sem servidor.
+        Envie uma mensagem com seu nome, sem servidor próprio. Todos que abrirem o site
+        verão os recados em tempo real por até 1 hora.
       </p>
       <div class="actions">
-        <a class="button primary" href="#diary">Criar registro</a>
-        <a class="button ghost" href="https://docs.github.com/pt/pages" target="_blank" rel="noreferrer">
-          Documentação do GitHub Pages
-        </a>
+        <a class="button primary" href="#chat">Abrir chat</a>
+        <a
+          class="button ghost"
+          href="https://gun.eco/" target="_blank" rel="noreferrer"
+          >Como funciona o banco distribuído</a
+        >
       </div>
     </div>
   </header>
 
   <main class="container">
-    <section class="card" id="diary">
+    <section class="card" id="chat">
       <div class="card__header">
         <div>
-          <p class="eyebrow">Banco de dados local</p>
-          <h2>Diário público</h2>
-          <p class="muted">As entradas são salvas no IndexedDB do seu navegador e podem ser exportadas.</p>
+          <p class="eyebrow">Mensagens públicas</p>
+          <h2>Envie um recado visível para todos</h2>
+          <p class="muted">Os posts expiram automaticamente após 1 hora.</p>
         </div>
-        <div class="chip" id="entry-count">0 registros</div>
+        <div class="chip" id="message-count">0 mensagens</div>
       </div>
 
-      <form id="entry-form" class="form">
-        <div class="field">
-          <label for="author">Nome</label>
-          <input id="author" name="author" type="text" autocomplete="name" placeholder="Seu nome" required />
+      <form id="message-form" class="form">
+        <div class="field inline">
+          <div class="field">
+            <label for="author">Seu nome</label>
+            <input
+              id="author"
+              name="author"
+              type="text"
+              autocomplete="name"
+              placeholder="Como quer aparecer"
+              required
+            />
+          </div>
+          <label class="checkbox remember">
+            <input type="checkbox" id="remember" name="remember" />
+            <span>Lembrar meu nome</span>
+          </label>
         </div>
         <div class="field">
           <label for="message">Mensagem</label>
@@ -52,38 +67,31 @@
             id="message"
             name="message"
             rows="3"
-            placeholder="Compartilhe sua experiência"
+            placeholder="Diga olá para quem estiver online"
             required
           ></textarea>
         </div>
-        <div class="field inline">
-          <label class="checkbox">
-            <input type="checkbox" id="pinned" name="pinned" />
-            <span>Fixar no topo</span>
-          </label>
-          <div class="actions">
-            <button type="button" class="button ghost" id="export-json">Exportar JSON</button>
-            <button type="button" class="button ghost" id="clear-db">Limpar banco</button>
-            <button type="submit" class="button primary">Salvar registro</button>
-          </div>
+        <div class="actions">
+          <p class="muted" id="status">Conectando à sala...</p>
+          <button type="submit" class="button primary">Enviar mensagem</button>
         </div>
       </form>
 
-      <div id="entries" class="grid"></div>
+      <div id="messages" class="feed"></div>
     </section>
 
     <section class="card">
       <div class="card__header">
         <div>
-          <p class="eyebrow">Como funciona</p>
-          <h2>Passos para deixar público</h2>
-          <p class="muted">Faça commit deste código e habilite o GitHub Pages para publicar automaticamente.</p>
+          <p class="eyebrow">Publicação simples</p>
+          <h2>Hospede no GitHub Pages</h2>
+          <p class="muted">Nenhuma configuração de backend necessária.</p>
         </div>
       </div>
       <ol class="steps">
         <li><strong>Habilite o GitHub Pages</strong> na aba <em>Settings &rarr; Pages</em> escolhendo a branch <code>main</code>.</li>
-        <li><strong>Suba o código</strong> para o GitHub; o workflow padrão publica o site em poucos minutos.</li>
-        <li><strong>Visite a URL pública</strong> gerada pelo Pages e comece a registrar entradas.</li>
+        <li><strong>Faça commit e push</strong> deste código. A página será publicada automaticamente.</li>
+        <li><strong>Compartilhe a URL pública</strong> para que todos possam ler e postar mensagens que expiram em 1 hora.</li>
       </ol>
     </section>
   </main>
@@ -93,15 +101,16 @@
       <div>
         <p class="eyebrow">Tecnologias usadas</p>
         <ul class="muted">
-          <li>HTML estático hospedado no GitHub Pages</li>
-          <li>IndexedDB para persistência local sem servidor</li>
-          <li>JavaScript moderno para operações de CRUD</li>
+          <li>HTML estático no GitHub Pages</li>
+          <li>Gun.js como banco distribuído sem servidor</li>
+          <li>JavaScript moderno para expiração automática</li>
         </ul>
       </div>
-      <p class="muted">&copy; 2024 · Construa e publique direto do seu repositório</p>
+      <p class="muted">&copy; 2024 · Chat público hospedado direto do repositório</p>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.min.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>
