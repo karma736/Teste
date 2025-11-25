@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Público</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Chat Público</h1>
+      <p>Envie uma mensagem para todos verem. Mensagens expiram após 2 horas.</p>
+    </header>
+
+    <section class="form-section">
+      <div class="field-group">
+        <label for="username">Seu nome</label>
+        <input type="text" id="username" placeholder="Digite seu nome" />
+        <label class="remember">
+          <input type="checkbox" id="rememberName" />
+          Lembrar meu nome
+        </label>
+      </div>
+      <div class="field-group">
+        <label for="content">Mensagem</label>
+        <textarea id="content" rows="3" placeholder="Digite sua mensagem"></textarea>
+      </div>
+      <button id="sendBtn">Enviar</button>
+      <p class="hint">Dica: sua mensagem será removida automaticamente em 2 horas.</p>
+    </section>
+
+    <section class="messages-section">
+      <h2>Mensagens</h2>
+      <div id="messages" class="messages"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
